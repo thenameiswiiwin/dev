@@ -12,7 +12,7 @@ font-family-italic = "DankMono Nerd Font Mono Italic"
 shell-integration-features = no-cursor,no-sudo,no-title
 gtk-titlebar = false
 
-font-size = 16
+font-size = 17
 
 window-padding-x = 10
 window-padding-y = 10

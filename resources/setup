@@ -4,7 +4,7 @@ sudo apt -y update
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 if ! command -v git &> /dev/null; then
-    sudo apt -y install git
+    brew install git
 fi
 
 if [ ! -d $HOME/personal ]; then

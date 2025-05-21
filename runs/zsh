@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 brew install zsh
+brew install zsh-autosuggestions zsh-fast-syntax-highlighting
 hash -r
 sudo chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

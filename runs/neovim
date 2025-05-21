@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-brew install neovim lua lua@5.1 luarock luacheck
+brew install neovim 
+brew install lua luarocks luacheck
 
 rm -rf $HOME/personal/harpoon
 rm -rf $HOME/personal/plenary
@@ -14,3 +15,11 @@ git checkout harpoon2
 
 git clone https://github.com/ThePrimeagen/vim-apm.git $HOME/workspace/github.com/thenameiswiiwin/vim-apm
 git clone https://github.com/nvim-lua/plenary.nvim.git $HOME/workspace/github.com/thenameiswiiwin/plenary
+
+cd $HOME/workspace/github.com/thenameiswiiwin/dev/lua-5.1.5
+make macosx
+mkdir ~/opt
+make INSTALL_TOP=$HOME/opt/lua@5.1 install
+mkdir -p ~/.local/bin
+ln -s ~/opt/lua@5.1/bin/lua ~/.local/bin/lua5.1
+export PATH=~/.local/bin/:$PATH

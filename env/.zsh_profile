@@ -1,8 +1,8 @@
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
 
-PERSONAL=$XDG_CONFIG_HOME/personal
-DEV_ENV=$HOME/workspace/github.com/thenameiswiiwin/dev
+export PERSONAL=$XDG_CONFIG_HOME/personal
+export DEV_ENV=$HOME/workspace/github.com/thenameiswiiwin/dev
 for i in `find -L $PERSONAL`; do
     source $i
 done
@@ -15,7 +15,7 @@ export DENO_INSTALL="$HOME/.deno"
 export N_PREFIX="$HOME/.local/n"
 export FLYCTL_INSTALL="/home/thenameiswiiwin/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
-export DEV_ENV_HOME="$HOME/personal/dev"
+DEV_ENV_HOME="$HOME/personal/dev"
 
 dev_env() {
 
@@ -69,6 +69,24 @@ addToPathFront $HOME/.local/zig true # some how zig-0.13 just keeps getting adde
 # thanks gt
 alias gt='NODE_OPTIONS="--no-deprecation" gt'
 
-source ~/.php_profile
-source ~/.config/envman/PATH.env
-source ~/.config/envman/load.sh
+alias glog='git log --graph --oneline --all'
+
+alias dev=$DEV_ENV
+alias v='nvim'
+alias vim='nvim'
+alias t='tmux'
+alias ll='ls -lah'
+alias l='ls -lah'
+alias hist='history | grep'
+alias port='sudo lsof -i'
+alias ps='ps aux | grep'
+alias kill_port='findandkill'
+alias bu='brew cleanup && brew update && brew upgrade && brew cleanup && brew doctor'
+alias bo='brew outdated'
+alias updates='echo "Updating Homebrew..." && brew update && brew upgrade && brew upgrade --cask --greedy && brew cleanup && echo "Updating App Store apps..." && mas upgrade && echo "Update finished!"'
+alias dsclean='sudo find / -name ".DS_Store" -exec rm -v {} \;'
+alias flush='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "DNS cache flushed"'
+
+# source ~/.php_profile
+# source ~/.config/envman/PATH.env
+# source ~/.config/envman/load.sh
