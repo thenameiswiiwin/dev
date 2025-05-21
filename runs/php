@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+brew install php composer
+composer global require laravel/installer

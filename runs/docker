@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+brew update
+brew install --cask docker
+open -a Docker
+echo "Waiting for Docker daemon to start..."
+until docker info &>/dev/null; do
+  echo "Docker daemon is starting..."
+  sleep 2
+done

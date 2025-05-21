@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+sudo apt -y update
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+if ! command -v git &> /dev/null; then
+    sudo apt -y install git
+fi
+
+if [ ! -d $HOME/personal ]; then
+    mkdir $HOME/personal
+fi
+
+if [ ! -d $HOME/workspace/github/thenameiswiiwin ]; then
+    mkdir -p  $HOME/workspace/github.com/thenameiswiiwin/
+fi
+
+git clone https://github.com/thenameiswiiwin/dev $HOME/workspace/github.com/thenameiswiiwin/dev
+
+pushd $HOME/workspace/github.com/thenameiswiiwin/dev
+./run
+popd
+

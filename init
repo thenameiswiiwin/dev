@@ -1,0 +1,9 @@
+git submodule init
+git submodule update
+pushd env/.config/nvim
+git checkout main
+popd
+cd tmux-sessionizer
+git checkout main
+cd ..
+

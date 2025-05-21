@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+brew install neovim lua lua@5.1 luarock luacheck
+
+rm -rf $HOME/personal/harpoon
+rm -rf $HOME/personal/plenary
+rm -rf $HOME/workspace/github.com/thenameiswiiwin/harpoon
+rm -rf $HOME/workspace/github.com/thenameiswiiwin/plenary
+
+git clone https://github.com/ThePrimeagen/harpoon.git $HOME/workspace/github.com/thenameiswiiwin/harpoon
+cd $HOME/workspace/github.com/thenameiswiiwin/harpoon
+git fetch
+git checkout harpoon2
+
+git clone https://github.com/ThePrimeagen/vim-apm.git $HOME/workspace/github.com/thenameiswiiwin/vim-apm
+git clone https://github.com/nvim-lua/plenary.nvim.git $HOME/workspace/github.com/thenameiswiiwin/plenary
