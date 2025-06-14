@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-brew install php composer
+brew install php composer php-code-sniffer php-cs-fixer
 composer global require laravel/installer
 mv ~/.profile ~/.php_profile

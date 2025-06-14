@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew install git ripgrep pavucontrol xclip jq tldr shutter python3 fzf findutils
+brew install git ripgrep pavucontrol xclip jq tldr shutter fzf findutils wget

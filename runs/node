@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-brew install nodejs npm n deno bun oven-sh/bun/bun
+brew install node npm n deno bun oven-sh/bun/bun
 n lts
 

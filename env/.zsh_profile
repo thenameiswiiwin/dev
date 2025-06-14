@@ -54,6 +54,8 @@ addToPathFront $HOME/.local/bin
 addToPathFront $HOME/.local/npm/bin
 addToPathFront $HOME/.local/n/bin/
 addToPathFront $HOME/.local/apps/
+addToPathFront /usr/local/bin
+addToPathFront /usr/local/sbin
 
 # do i need this one?
 addToPathFront $HOME/.local/go/bin

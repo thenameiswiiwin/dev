@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+brew install --cask raycast nordvpm brave-browser vlc 1password spotify qutebrowser

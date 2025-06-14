@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-brew install tldr go fzf btop bc stylua node npm bat mas lazygit ripgrep
+brew install tldr go fzf btop bc stylua bat mas lazygit ripgrep fd diff-so-fancy
+brew install prettier prettierd
 go install github.com/air-verse/air@latest
 brew install --cask font-fontawesome
 brew install --cask ghostty
