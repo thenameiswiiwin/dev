@@ -6,7 +6,7 @@ background-opacity = 0.9
 background-blur = false
 confirm-close-surface = false
 
-window-decoration = false
+# window-decoration = false
 
 font-family = "DankMono Nerd Font Mono"
 font-family-bold = "DankMono Nerd Font Mono Bold"
@@ -23,3 +23,6 @@ window-padding-y = 10, 0
 # what is a prefix?
 # keybind = ctrl+d=scroll_page_fractional:0.5
 # keybind = ctrl+u=scroll_page_fractional:-0.5
+
+# Disable Ctrl+Enter fullscreen keybind
+keybind = ctrl+enter=unbind
