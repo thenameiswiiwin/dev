@@ -3,6 +3,7 @@ VIM="nvim"
 
 export PERSONAL=$XDG_CONFIG_HOME/personal
 export DEV_ENV=$HOME/workspace/github.com/thenameiswiiwin/dev
+export WORKSPACE=$HOME/workspace/github.com/thenameiswiiwin
 for i in `find -L $PERSONAL`; do
     source $i
 done
@@ -15,6 +16,8 @@ export DENO_INSTALL="$HOME/.deno"
 export N_PREFIX="$HOME/.local/n"
 export FLYCTL_INSTALL="/home/thenameiswiiwin/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/postgresql@17/lib"
+export CPPFLAGS="-I/usr/local/opt/postgresql@17/include"
 DEV_ENV_HOME="$HOME/personal/dev"
 
 dev_env() {
@@ -56,6 +59,7 @@ addToPathFront $HOME/.local/n/bin/
 addToPathFront $HOME/.local/apps/
 addToPathFront /usr/local/bin
 addToPathFront /usr/local/sbin
+addToPathFront /usr/local/opt/postgresql@17/bin
 
 # do i need this one?
 addToPathFront $HOME/.local/go/bin
@@ -74,6 +78,7 @@ alias gt='NODE_OPTIONS="--no-deprecation" gt'
 alias glog='git log --graph --oneline --all'
 
 alias dev=$DEV_ENV
+alias workspace=$WORKSPACE
 alias v='nvim'
 alias vim='nvim'
 alias t='tmux'
