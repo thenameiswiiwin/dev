@@ -6,7 +6,7 @@ background-opacity = 0.9
 background-blur = false
 confirm-close-surface = false
 
-# window-decoration = false
+window-decoration = false
 
 font-family = "DankMono Nerd Font Mono"
 font-family-bold = "DankMono Nerd Font Mono Bold"
@@ -15,7 +15,7 @@ font-family-italic = "DankMono Nerd Font Mono Italic"
 shell-integration-features = no-cursor,no-sudo,no-title
 gtk-titlebar = false
 
-font-size = 17.5
+font-size = 16
 
 # window-padding-x = 5, 5
 window-padding-y = 10, 0

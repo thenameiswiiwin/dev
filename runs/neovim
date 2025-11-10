@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-brew install neovim 
+brew install neovim
 brew install lua luarocks luacheck
 
 rm -rf $HOME/personal/harpoon

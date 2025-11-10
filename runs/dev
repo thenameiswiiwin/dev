@@ -5,4 +5,4 @@ brew install prettier prettierd
 go install github.com/air-verse/air@latest
 brew install --cask font-fontawesome
 brew install --cask ghostty
-
+brew install --cask claude-code

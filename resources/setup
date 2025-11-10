@@ -3,16 +3,16 @@ sudo apt -y update
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-if ! command -v git &> /dev/null; then
-    brew install git
+if ! command -v git &>/dev/null; then
+  brew install git
 fi
 
 if [ ! -d $HOME/personal ]; then
-    mkdir $HOME/personal
+  mkdir $HOME/personal
 fi
 
 if [ ! -d $HOME/workspace/github/thenameiswiiwin ]; then
-    mkdir -p  $HOME/workspace/github.com/thenameiswiiwin/
+  mkdir -p $HOME/workspace/github.com/thenameiswiiwin/
 fi
 
 git clone https://github.com/thenameiswiiwin/dev $HOME/workspace/github.com/thenameiswiiwin/dev
@@ -20,4 +20,3 @@ git clone https://github.com/thenameiswiiwin/dev $HOME/workspace/github.com/then
 pushd $HOME/workspace/github.com/thenameiswiiwin/dev
 ./run
 popd
-

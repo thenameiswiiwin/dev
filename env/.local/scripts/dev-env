@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 (
-cd $HOME/workspace/github/thenameiswiiwin/dev
-./dev-env
-hash -r
+  cd $HOME/workspace/github/thenameiswiiwin/dev
+  ./dev-env
+  hash -r
 )
