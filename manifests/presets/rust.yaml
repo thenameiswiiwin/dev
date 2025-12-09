@@ -1,0 +1,42 @@
+# Rust development preset
+name: rust
+description: Rust development with rustup, rust-analyzer, clippy, and rustfmt
+
+packages:
+  # Rust toolchain (via rustup)
+  - name: rustup
+    brew: rustup
+    install_method: script
+    script_url: https://sh.rustup.rs
+    description: Rust toolchain installer
+
+  # Debugger
+  - name: lldb
+    brew: lldb
+    apt: lldb
+    pacman: lldb
+    description: LLVM debugger for Rust
+
+# Post-install commands
+post_install:
+  - rustup default stable
+  - rustup component add rust-analyzer
+  - rustup component add rustfmt
+  - rustup component add clippy
+
+# Neovim configuration
+nvim:
+  mason_ensure_installed:
+    - rust-analyzer
+    - codelldb
+
+  format_on_save: true
+  formatter: rustfmt
+
+# Shell aliases
+aliases:
+  rtest: cargo test
+  rbuild: cargo build
+  rfmt: cargo fmt
+  rcheck: cargo clippy
+  rrun: cargo run

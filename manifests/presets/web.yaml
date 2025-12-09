@@ -1,0 +1,62 @@
+# Web development preset (React/Next.js/TypeScript/Tailwind)
+name: web
+description: Web development with Node.js, TypeScript, React, and Tailwind CSS
+
+packages:
+  # Node.js toolchain
+  - name: node
+    brew: node@22
+    apt: nodejs
+    pacman: nodejs
+    description: Node.js runtime
+
+  - name: volta
+    brew: volta
+    install_method: script
+    script_url: https://get.volta.sh
+    description: Node version manager
+
+  - name: pnpm
+    brew: pnpm
+    install_method: npm
+    npm_package: pnpm
+    description: Fast package manager
+
+  - name: bun
+    brew: bun
+    install_method: script
+    script_url: https://bun.sh/install
+    description: Fast JavaScript runtime (optional)
+
+# Global npm packages
+npm_global:
+  - typescript
+  - tsx
+  - eslint
+  - prettier
+  - vite
+
+# Neovim configuration
+nvim:
+  mason_ensure_installed:
+    - typescript-language-server
+    - vtsls
+    - eslint_d
+    - prettierd
+    - tailwindcss-language-server
+    - volar
+    - js-debug-adapter
+
+  format_on_save: true
+  formatter: prettierd
+
+# Shell aliases
+aliases:
+  ndev: npm run dev
+  nbuild: npm run build
+  ntest: npm test
+  nlint: eslint .
+  nfmt: prettier --write .
+  pdev: pnpm dev
+  pbuild: pnpm build
+  ptest: pnpm test

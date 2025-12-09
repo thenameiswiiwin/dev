@@ -1,4 +1,32 @@
+# Build artifacts
+/bin/
 /test/
-main
-/Emojicode-1.0-beta.2-Linux-x86_64/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go files
+*.test
+*.out
+vendor/
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.backup-*
+*.bak
+
+# Temporary files
+*.tmp
+*.log

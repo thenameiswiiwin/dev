@@ -1,0 +1,53 @@
+# Go development preset
+name: go
+description: Go development with gopls, gofumpt, golangci-lint, and delve
+
+packages:
+  # Go toolchain
+  - name: go
+    brew: go
+    apt: golang-go
+    pacman: go
+    description: Go programming language
+
+  # Formatting and linting
+  - name: gofumpt
+    install_method: go_install
+    go_package: mvdan.cc/gofumpt@latest
+    description: Stricter gofmt
+
+  - name: golangci-lint
+    brew: golangci-lint
+    apt: golangci-lint
+    pacman: golangci-lint
+    description: Go linters aggregator
+
+  # Debugger
+  - name: delve
+    install_method: go_install
+    go_package: github.com/go-delve/delve/cmd/dlv@latest
+    description: Go debugger
+
+  # LSP (installed via Mason in Neovim)
+  - name: gopls
+    install_method: go_install
+    go_package: golang.org/x/tools/gopls@latest
+    description: Go language server
+
+# Neovim configuration
+nvim:
+  mason_ensure_installed:
+    - gopls
+    - gofumpt
+    - golangci-lint
+    - delve
+
+  format_on_save: true
+  formatter: gofumpt
+
+# Shell aliases
+aliases:
+  gtest: go test ./...
+  gbuild: go build ./...
+  gfmt: gofumpt -l -w .
+  glint: golangci-lint run

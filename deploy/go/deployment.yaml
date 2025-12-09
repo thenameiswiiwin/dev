@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-env-go
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-env-go
+  template:
+    metadata:
+      labels:
+        app: dev-env-go
+    spec:
+      containers:
+      - name: go-app
+        image: dev-env-go:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+        - containerPort: 2345
+          name: debug
+        env:
+        - name: PORT
+          value: "8080"
+        - name: DEV_PRESET
+          value: "go"
+        envFrom:
+        - configMapRef:
+            name: go-config
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: http
+          initialDelaySeconds: 5

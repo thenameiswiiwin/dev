@@ -1,0 +1,84 @@
+# Base development tools and utilities
+# These are installed during bootstrap
+name: base
+description: Core development tools and shell utilities
+
+packages:
+  # Version control
+  - name: git
+    brew: git
+    apt: git
+    pacman: git
+    description: Version control system
+
+  # Network utilities
+  - name: curl
+    brew: curl
+    apt: curl
+    pacman: curl
+    description: Command-line HTTP client
+
+  # Shell and terminal
+  - name: zsh
+    brew: zsh
+    apt: zsh
+    pacman: zsh
+    description: Z shell
+
+  - name: tmux
+    brew: tmux
+    apt: tmux
+    pacman: tmux
+    description: Terminal multiplexer
+
+  # Modern CLI tools
+  - name: ripgrep
+    brew: ripgrep
+    apt: ripgrep
+    pacman: ripgrep
+    description: Fast text search
+
+  - name: fd
+    brew: fd
+    apt: fd-find
+    pacman: fd
+    description: Fast file finder
+
+  - name: fzf
+    brew: fzf
+    apt: fzf
+    pacman: fzf
+    description: Fuzzy finder
+
+  - name: bat
+    brew: bat
+    apt: bat
+    pacman: bat
+    description: Cat clone with syntax highlighting
+
+  - name: lazygit
+    brew: lazygit
+    apt: lazygit
+    pacman: lazygit
+    description: Terminal UI for git
+
+  # Editor
+  - name: neovim
+    brew: neovim
+    apt: neovim
+    pacman: neovim
+    description: Modern Vim-based editor
+
+  # System monitoring
+  - name: btop
+    brew: btop
+    apt: btop
+    pacman: btop
+    description: Resource monitor
+
+  # Database client
+  - name: postgresql-client
+    brew: postgresql@16
+    apt: postgresql-client
+    pacman: postgresql
+    description: PostgreSQL client tools

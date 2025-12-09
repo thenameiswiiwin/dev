@@ -24,4 +24,5 @@ require (
 	golang.org/x/image v0.28.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	gopkg.in/go-playground/colors.v1 v1.2.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

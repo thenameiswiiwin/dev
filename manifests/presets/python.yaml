@@ -1,0 +1,62 @@
+# Python development preset
+name: python
+description: Python development with uv/pyenv, pyright, ruff, and pytest
+
+packages:
+  # Python toolchain
+  - name: python3
+    brew: python@3.12
+    apt: python3.12
+    pacman: python
+    description: Python 3.12 runtime
+
+  - name: uv
+    brew: uv
+    apt: uv # via pipx or binary
+    pacman: uv
+    description: Fast Python package installer (Rust-based)
+
+  - name: pipx
+    brew: pipx
+    apt: pipx
+    pacman: python-pipx
+    description: Install Python CLI tools in isolated environments
+
+  # LSP and formatting
+  - name: pyright
+    install_method: pipx
+    description: Python language server
+
+  - name: ruff
+    brew: ruff
+    install_method: pipx
+    description: Fast Python linter and formatter
+
+  - name: black
+    install_method: pipx
+    description: Python code formatter (optional)
+
+  - name: debugpy
+    install_method: pip
+    description: Python debugger for DAP
+
+  # Testing
+  - name: pytest
+    install_method: pip
+    description: Python testing framework
+
+# Neovim configuration
+nvim:
+  mason_ensure_installed:
+    - pyright
+    - ruff
+    - debugpy
+
+  format_on_save: true
+  formatter: ruff
+
+# Shell aliases
+aliases:
+  ptest: pytest -v
+  pruff: ruff check .
+  pfmt: ruff format .

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-env-python
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-env-python
+  template:
+    metadata:
+      labels:
+        app: dev-env-python
+    spec:
+      containers:
+      - name: python-app
+        image: dev-env-python:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        - containerPort: 5678
+          name: debug
+          protocol: TCP
+        env:
+        - name: PORT
+          value: "8000"
+        - name: DEV_PRESET
+          value: "python"
+        envFrom:
+        - configMapRef:
+            name: python-config
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5

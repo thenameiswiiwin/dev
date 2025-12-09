@@ -1,0 +1,154 @@
+name: CI
+
+on:
+  push:
+    branches: [main, test]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # Lint and test Go code
+  go-checks:
+    name: Go Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.x'
+
+      - name: Go mod download
+        run: go mod download
+
+      - name: Run gofmt
+        run: |
+          if [ -n "$(gofmt -l .)" ]; then
+            echo "Go code is not formatted:"
+            gofmt -d .
+            exit 1
+          fi
+
+      - name: Run go vet
+        run: go vet ./...
+
+      - name: Run go test
+        run: go test -v ./...
+
+      - name: Build CLI
+        run: go build -o bin/dev ./cmd/dev
+
+  # Lint shell scripts
+  shell-checks:
+    name: Shell Script Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+
+      - name: Install shfmt
+        run: |
+          wget -O /tmp/shfmt https://github.com/mvdan/sh/releases/download/v3.8.0/shfmt_v3.8.0_linux_amd64
+          chmod +x /tmp/shfmt
+          sudo mv /tmp/shfmt /usr/local/bin/
+
+      - name: Run shellcheck on scripts
+        run: |
+          find . -name "*.sh" -o -path "./runs/*" -type f -executable | while read -r file; do
+            if file "$file" | grep -q "shell script"; then
+              echo "Checking $file"
+              shellcheck "$file" || true
+            fi
+          done
+
+      - name: Run shfmt on scripts
+        run: |
+          find . -name "*.sh" -o -path "./runs/*" -type f -executable | while read -r file; do
+            if file "$file" | grep -q "shell script"; then
+              echo "Checking format: $file"
+              shfmt -d "$file" || true
+            fi
+          done
+
+  # Validate manifests
+  manifest-checks:
+    name: Manifest Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate YAML syntax
+        run: |
+          for file in manifests/*.yaml manifests/presets/*.yaml; do
+            if [ -f "$file" ]; then
+              echo "Validating $file"
+              python3 -c "import yaml; yaml.safe_load(open('$file'))" || exit 1
+            fi
+          done
+
+  # Build preset containers
+  build-containers:
+    name: Build ${{ matrix.preset }} container
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        preset: [python, go, rust, web]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build ${{ matrix.preset }} image
+        run: |
+          docker build \
+            -t dev-env-${{ matrix.preset }}:ci \
+            -f containers/${{ matrix.preset }}/Dockerfile \
+            containers/${{ matrix.preset }}/
+
+      - name: Run smoke test
+        run: |
+          case "${{ matrix.preset }}" in
+            python)
+              docker run --rm dev-env-${{ matrix.preset }}:ci python3 --version
+              ;;
+            go)
+              docker run --rm dev-env-${{ matrix.preset }}:ci go version
+              ;;
+            rust)
+              docker run --rm dev-env-${{ matrix.preset }}:ci rustc --version
+              ;;
+            web)
+              docker run --rm dev-env-${{ matrix.preset }}:ci node --version
+              ;;
+          esac
+
+  # Validate K8s manifests
+  k8s-checks:
+    name: Validate K8s for ${{ matrix.preset }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        preset: [python, go, rust, web]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Validate K8s manifests
+        run: |
+          if [ -d "deploy/${{ matrix.preset }}" ]; then
+            kubectl kustomize deploy/${{ matrix.preset }}/ > /dev/null
+            echo "✓ K8s manifests valid for ${{ matrix.preset }}"
+          fi
