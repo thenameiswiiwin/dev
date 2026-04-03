@@ -83,6 +83,7 @@ alias glog='git log --graph --oneline --all'
 
 alias dev=$DEV_ENV
 alias workspace=$WORKSPACE
+alias penv='python3 -m venv venv && source venv/bin/activate && pip install -U pip setuptools wheel'
 alias v='nvim'
 alias vim='nvim'
 alias t='tmux'
